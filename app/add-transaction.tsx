@@ -118,16 +118,23 @@ export default function AddTransaction() {
 
     setLoading(true);
     try {
+      const numPeople = parseInt(splitPeople) || 1;
+      const finalAmount = isSplit ? numAmount / numPeople : numAmount;
+
       const splitInfo = isSplit ? {
-        people: parseInt(splitPeople) || 1,
-        amountPerPerson: numAmount / (parseInt(splitPeople) || 1),
+        people: numPeople,
+        amountPerPerson: finalAmount,
         notes: splitNotes
       } : undefined;
 
+      const finalNote = isSplit
+        ? `${note ? note + " " : ""}[Split Bill] Total: ₱${numAmount.toFixed(2)} split with ${numPeople} people.`
+        : note;
+
       await addTransaction({
-        amount: numAmount,
+        amount: finalAmount,
         date: date.toISOString(),
-        note,
+        note: finalNote,
         type,
         category: selectedCategory,
         paymentMethod,
@@ -248,8 +255,11 @@ export default function AddTransaction() {
 
         {isSplit && (
           <View style={{ backgroundColor: "#e8def8", padding: 12, borderRadius: 8, marginBottom: 16 }}>
-            <Text variant="bodySmall" style={{ color: "#6200ee" }}>
-              Amount per person: <Text style={{ fontWeight: "bold" }}>₱{splitAmountPerPerson.toFixed(2)}</Text>
+            <Text variant="bodySmall" style={{ color: "#6200ee", fontWeight: "bold" }}>
+              Only your share (₱{splitAmountPerPerson.toFixed(2)}) will be added to your balance.
+            </Text>
+            <Text variant="bodySmall" style={{ marginTop: 4, color: "#666" }}>
+              Total: ₱{(parseFloat(amount) || 0).toFixed(2)} split with {splitPeople} people.
             </Text>
             {splitNotes && <Text variant="bodySmall" style={{ marginTop: 4 }}>Notes: {splitNotes}</Text>}
           </View>

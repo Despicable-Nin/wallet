@@ -118,7 +118,9 @@ export default function TransactionDetails() {
             {transaction.note && (
               <View style={{ marginBottom: 12 }}>
                 <Text variant="labelSmall" style={{ color: "gray" }}>Note</Text>
-                <Text variant="bodyLarge">{transaction.note}</Text>
+                <Text variant="bodyLarge">
+                  {transaction.note.replace(/\s*\[Split Bill\].*$/s, "").trim()}
+                </Text>
               </View>
             )}
           </Card.Content>
