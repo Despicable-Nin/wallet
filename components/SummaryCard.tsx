@@ -1,11 +1,14 @@
 import { View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Transaction } from "../types";
 import { useCurrency } from "../context/CurrencyContext";
 import { useUserProfile } from "../context/UserProfileContext";
+import { useTheme } from "react-native-paper";
 
 export function SummaryCard({ transactions }: { transactions: Transaction[] }) {
+  const theme = useTheme();
   const { formatAmount } = useCurrency();
   const { profile } = useUserProfile();
 
@@ -22,28 +25,52 @@ export function SummaryCard({ transactions }: { transactions: Transaction[] }) {
   const balance = initialBalance + income - expense;
 
   return (
-    <Card style={{ margin: 16, borderRadius: 16, elevation: 4 }}>
+    <View style={{ marginHorizontal: 16, marginBottom: 8 }}>
       <LinearGradient
-        colors={["#4c669f", "#3b5998", "#192f6a"]}
-        style={{ borderRadius: 16, padding: 20 }}
+        colors={[theme.colors.primary, "#0A2145"]}
+        start={{ x: 0, y: 0 }}
+        end={{ x: 1, y: 1 }}
+        style={{
+          borderRadius: 24,
+          padding: 24,
+          elevation: 8,
+          shadowColor: theme.colors.primary,
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.3,
+          shadowRadius: 12,
+        }}
       >
-        <Text variant="titleMedium" style={{ color: "#fff", opacity: 0.8, textAlign: "center" }}>
-          Total Balance
+        <Text variant="labelMedium" style={{ color: "#fff", opacity: 0.7, textAlign: "center", letterSpacing: 1, fontWeight: "600" }}>
+          TOTAL BALANCE
         </Text>
-        <Text variant="displayMedium" style={{ color: "#fff", fontWeight: "bold", textAlign: "center", marginVertical: 8 }}>
+        <Text variant="displayMedium" style={{ color: "#fff", fontWeight: "800", textAlign: "center", marginVertical: 12 }}>
           {formatAmount(balance)}
         </Text>
-        <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 16 }}>
-          <View>
-            <Text variant="labelMedium" style={{ color: "#a5d6a7" }}>Income</Text>
-            <Text variant="titleLarge" style={{ color: "#fff" }}>+{formatAmount(income)}</Text>
+
+        <View style={{ height: 1, backgroundColor: "rgba(255,255,255,0.1)", marginVertical: 16 }} />
+
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: "rgba(39, 174, 96, 0.2)", justifyContent: "center", alignItems: "center", marginRight: 8 }}>
+              <MaterialCommunityIcons name="arrow-down" size={18} color="#27AE60" />
+            </View>
+            <View>
+              <Text variant="labelSmall" style={{ color: "#fff", opacity: 0.6 }}>Income</Text>
+              <Text variant="titleMedium" style={{ color: "#fff", fontWeight: "700" }}>{formatAmount(income)}</Text>
+            </View>
           </View>
-          <View>
-            <Text variant="labelMedium" style={{ color: "#ef9a9a", textAlign: "right" }}>Expense</Text>
-            <Text variant="titleLarge" style={{ color: "#fff", textAlign: "right" }}>-{formatAmount(expense)}</Text>
+
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            <View style={{ width: 32, height: 32, borderRadius: 10, backgroundColor: "rgba(229, 57, 53, 0.2)", justifyContent: "center", alignItems: "center", marginRight: 8 }}>
+              <MaterialCommunityIcons name="arrow-up" size={18} color="#E53935" />
+            </View>
+            <View>
+              <Text variant="labelSmall" style={{ color: "#fff", opacity: 0.6, textAlign: "right" }}>Expense</Text>
+              <Text variant="titleMedium" style={{ color: "#fff", fontWeight: "700", textAlign: "right" }}>{formatAmount(expense)}</Text>
+            </View>
           </View>
         </View>
       </LinearGradient>
-    </Card>
+    </View>
   );
 }

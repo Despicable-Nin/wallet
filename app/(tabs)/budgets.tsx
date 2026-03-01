@@ -2,9 +2,9 @@ import { useState, useCallback } from "react";
 import { View, ScrollView } from "react-native";
 import { Appbar, Text, FAB, Portal, Modal, TextInput, Button, Card, ProgressBar, useTheme } from "react-native-paper";
 import { useRouter, useFocusEffect } from "expo-router";
-import { useBudgets } from "../hooks/useBudgets";
-import { useTransactions } from "../hooks/useTransactions";
-import { useCurrency } from "../context/CurrencyContext";
+import { useBudgets } from "../../hooks/useBudgets";
+import { useTransactions } from "../../hooks/useTransactions";
+import { useCurrency } from "../../context/CurrencyContext";
 
 export default function BudgetsScreen() {
   const router = useRouter();
@@ -47,10 +47,9 @@ export default function BudgetsScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => router.back()} />
-        <Appbar.Content title="Budgets" />
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <Appbar.Header style={{ backgroundColor: theme.colors.background, elevation: 0 }}>
+        <Appbar.Content title="Budgets" titleStyle={{ fontWeight: "700" }} />
       </Appbar.Header>
 
       <ScrollView contentContainerStyle={{ padding: 16 }}>
@@ -62,7 +61,7 @@ export default function BudgetsScreen() {
           </Card>
         ) : (
           budgets.map((budget) => {
-            const spent = getCategorySpending(budget.categoryId);
+            const spent = getCategorySpending(Number(budget.categoryId));
             const percentage = Math.min(spent / budget.amount, 1);
             const isOverBudget = spent > budget.amount;
             const remaining = budget.amount - spent;

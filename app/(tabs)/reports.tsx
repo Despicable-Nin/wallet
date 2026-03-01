@@ -3,11 +3,11 @@ import { View, ScrollView, Dimensions } from "react-native";
 import { Appbar, Text, Card, SegmentedButtons, useTheme, Button } from "react-native-paper";
 import { useRouter, useFocusEffect } from "expo-router";
 import { BarChart } from "react-native-chart-kit";
-import { useTransactions } from "../hooks/useTransactions";
-import { useCurrency } from "../context/CurrencyContext";
-import { ChartCard } from "../components/ChartCard";
-import { PaymentMethodChart } from "../components/PaymentMethodChart";
-import { exportToCSV, exportToPDF } from "../utils/exportUtils";
+import { useTransactions } from "../../hooks/useTransactions";
+import { useCurrency } from "../../context/CurrencyContext";
+import { ChartCard } from "../../components/ChartCard";
+import { PaymentMethodChart } from "../../components/PaymentMethodChart";
+import { exportToCSV, exportToPDF } from "../../utils/exportUtils";
 
 export default function ReportsScreen() {
   const router = useRouter();
@@ -53,10 +53,9 @@ export default function ReportsScreen() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => router.back()} />
-        <Appbar.Content title="Reports" />
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <Appbar.Header style={{ backgroundColor: theme.colors.background, elevation: 0 }}>
+        <Appbar.Content title="Analysis" titleStyle={{ fontWeight: "700" }} />
       </Appbar.Header>
 
       <ScrollView contentContainerStyle={{ padding: 16 }}>

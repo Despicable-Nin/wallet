@@ -28,13 +28,16 @@ export function FinancialTip() {
   };
 
   return (
-    <Card style={{ margin: 16, marginTop: 8, backgroundColor: "#e8f5e9", borderRadius: 12 }}>
+    <Card style={{ margin: 16, marginTop: 8, backgroundColor: "#e3f2fd", borderRadius: 12, borderLeftWidth: 4, borderLeftColor: "#1976d2" }}>
       <Card.Content style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={{ flex: 1 }}>
-          <Text variant="labelSmall" style={{ color: theme.colors.primary, marginBottom: 4 }}>
-             Financial Tip
+          <Text variant="labelSmall" style={{ color: "#1976d2", marginBottom: 4, fontWeight: "bold" }}>
+            💡 Financial Tip
           </Text>
           <Text variant="bodyMedium">{TIPS[tipIndex]}</Text>
+          <Text variant="bodySmall" style={{ color: "#90a4ae", fontSize: 11, fontStyle: "italic", marginTop: 6 }}>
+            📹 In the future, there will be suggested video links here.
+          </Text>
         </View>
         <IconButton icon="refresh" onPress={nextTip} />
       </Card.Content>

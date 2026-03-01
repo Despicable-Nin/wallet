@@ -1,19 +1,18 @@
 import { View } from "react-native";
 import { Appbar, List, RadioButton, Text, Card, Switch, Divider } from "react-native-paper";
 import { useRouter } from "expo-router";
-import { useCurrency, CURRENCIES, CurrencyCode } from "../context/CurrencyContext";
-import { useAppTheme } from "../context/ThemeContext";
+import { useCurrency, CURRENCIES, CurrencyCode } from "../../context/CurrencyContext";
+import { useAppTheme } from "../../context/ThemeContext";
 
 export default function SettingsScreen() {
   const router = useRouter();
   const { currency, setCurrency } = useCurrency();
-  const { isDarkMode, toggleTheme } = useAppTheme();
+  const { theme, isDarkMode, toggleTheme } = useAppTheme();
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
-      <Appbar.Header>
-        <Appbar.BackAction onPress={() => router.back()} />
-        <Appbar.Content title="Settings" />
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+      <Appbar.Header style={{ backgroundColor: theme.colors.background, elevation: 0 }}>
+        <Appbar.Content title="Settings" titleStyle={{ fontWeight: "700" }} />
       </Appbar.Header>
 
       <View style={{ padding: 16 }}>

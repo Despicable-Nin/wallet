@@ -11,18 +11,19 @@ function MainLayout() {
   return (
     <PaperProvider theme={theme}>
       <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="onboarding" options={{ title: "Welcome", animation: "fade" }} />
-        <Stack.Screen name="index" options={{ title: "Dashboard" }} />
-        <Stack.Screen name="add-transaction" options={{ title: "Add Transaction" }} />
-        <Stack.Screen name="edit-transaction" options={{ title: "Edit Transaction" }} />
-        <Stack.Screen name="transaction-details" options={{ title: "Transaction Details" }} />
-        <Stack.Screen name="calendar" options={{ title: "Calendar" }} />
-        <Stack.Screen name="budgets" options={{ title: "Budgets" }} />
-        <Stack.Screen name="reports" options={{ title: "Reports" }} />
-        <Stack.Screen name="agenda" options={{ title: "Agenda" }} />
-        <Stack.Screen name="subscriptions" options={{ title: "Subscriptions" }} />
-        <Stack.Screen name="savings" options={{ title: "Savings" }} />
-        <Stack.Screen name="settings" options={{ title: "Settings" }} />
+        <Stack.Screen name="onboarding" options={{ animation: "fade" }} />
+
+        {/* Main App with Bottom Tabs */}
+        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+
+        {/* Modals / Sub-screens */}
+        <Stack.Screen name="add-transaction" options={{ presentation: "modal" }} />
+        <Stack.Screen name="edit-transaction" options={{ presentation: "modal" }} />
+        <Stack.Screen name="transaction-details" options={{ title: "Details" }} />
+        <Stack.Screen name="calendar" />
+        <Stack.Screen name="agenda" />
+        <Stack.Screen name="subscriptions" />
+        <Stack.Screen name="savings" />
       </Stack>
     </PaperProvider>
   );

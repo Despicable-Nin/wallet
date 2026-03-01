@@ -18,8 +18,49 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
     reactNavigationDark: NavigationDarkTheme,
 });
 
-const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme);
-const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme);
+const CustomLightTheme = {
+    ...MD3LightTheme,
+    colors: {
+        ...MD3LightTheme.colors,
+        primary: '#1B3F7A',
+        onPrimary: '#FFFFFF',
+        primaryContainer: '#D6E4FF',
+        secondary: '#2D9CDB',
+        onSecondary: '#FFFFFF',
+        tertiary: '#27AE60',
+        error: '#E53935',
+        background: '#F4F6FA',
+        surface: '#FFFFFF',
+        onBackground: '#1A1A2E',
+        onSurface: '#1A1A2E',
+        surfaceVariant: '#E8EDF5',
+        outline: '#B0BEC5',
+    },
+};
+
+const CustomDarkTheme = {
+    ...MD3DarkTheme,
+    colors: {
+        ...MD3DarkTheme.colors,
+        primary: '#4A90D9',
+        onPrimary: '#001F4D',
+        primaryContainer: '#003580',
+        secondary: '#56CCF2',
+        background: '#0D1117',
+        surface: '#161B22',
+        onBackground: '#E6EDF3',
+        onSurface: '#E6EDF3',
+    },
+};
+
+const CombinedDefaultTheme = {
+    ...merge(LightTheme, CustomLightTheme),
+    roundness: 3, // More modern, rounded feel
+};
+const CombinedDarkTheme = {
+    ...merge(DarkTheme, CustomDarkTheme),
+    roundness: 3,
+};
 
 interface ThemeContextType {
     isDarkMode: boolean;

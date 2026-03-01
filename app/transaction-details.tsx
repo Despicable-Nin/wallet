@@ -47,7 +47,7 @@ export default function TransactionDetails() {
   const isIncome = transaction.type === "income";
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#f5f5f5" }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title="Transaction Details" />

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, ScrollView, Image, Platform, Alert } from "react-native";
-import { Appbar, TextInput, Button, SegmentedButtons, Text, Chip, IconButton } from "react-native-paper";
+import { Appbar, TextInput, Button, SegmentedButtons, Text, Chip, IconButton, useTheme } from "react-native-paper";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
 import DateTimePicker from "@react-native-community/datetimepicker";
@@ -49,7 +49,7 @@ export default function EditTransaction() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch("http://192.168.1.8:3000/categories");
+      const response = await fetch("http://localhost:3000/categories");
       const data = await response.json();
       if (data && data.length > 0) {
         setAvailableCategories(data);
@@ -139,8 +139,10 @@ export default function EditTransaction() {
     }
   };
 
+  const theme = useTheme();
+
   return (
-    <View style={{ flex: 1, backgroundColor: "#fff" }}>
+    <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Appbar.Header>
         <Appbar.BackAction onPress={() => router.back()} />
         <Appbar.Content title="Edit Transaction" />
@@ -246,12 +248,24 @@ export default function EditTransaction() {
         </Button>
 
         {showCalendar && (
-          <DateTimePicker
-            value={date}
-            mode="date"
-            display="default"
-            onChange={onDateChange}
-          />
+          Platform.OS === 'web' ? (
+            <input
+              type="date"
+              value={date.toISOString().split('T')[0]}
+              onChange={(e) => {
+                if (e.target.value) setDate(new Date(e.target.value));
+                setShowCalendar(false);
+              }}
+              style={{ marginBottom: 16, padding: 8, fontSize: 16, width: '100%' }}
+            />
+          ) : (
+            <DateTimePicker
+              value={date}
+              mode="date"
+              display="default"
+              onChange={onDateChange}
+            />
+          )
         )}
       </ScrollView>
     </View>
