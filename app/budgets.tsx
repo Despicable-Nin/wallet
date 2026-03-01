@@ -2,9 +2,9 @@ import { useState, useCallback } from "react";
 import { View, ScrollView } from "react-native";
 import { Appbar, Text, FAB, Portal, Modal, TextInput, Button, Card, ProgressBar, useTheme } from "react-native-paper";
 import { useRouter, useFocusEffect } from "expo-router";
-import { useBudgets } from "../../hooks/useBudgets";
-import { useTransactions } from "../../hooks/useTransactions";
-import { useCurrency } from "../../context/CurrencyContext";
+import { useBudgets } from "../hooks/useBudgets";
+import { useTransactions } from "../hooks/useTransactions";
+import { useCurrency } from "../context/CurrencyContext";
 
 export default function BudgetsScreen() {
   const router = useRouter();

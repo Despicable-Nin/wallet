@@ -36,20 +36,20 @@ export default function TabLayout() {
                 }}
             />
             <Tabs.Screen
-                name="budgets"
+                name="reports"
                 options={{
-                    title: "Budgets",
+                    title: "Reports",
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="wallet" size={size} color={color} />
+                        <MaterialCommunityIcons name="chart-bar" size={size} color={color} />
                     ),
                 }}
             />
             <Tabs.Screen
-                name="reports"
+                name="learning"
                 options={{
-                    title: "Analysis",
+                    title: "Learning",
                     tabBarIcon: ({ color, size }) => (
-                        <MaterialCommunityIcons name="chart-arc" size={size} color={color} />
+                        <MaterialCommunityIcons name="school" size={size} color={color} />
                     ),
                 }}
             />

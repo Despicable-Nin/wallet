@@ -10,6 +10,7 @@
     "server": "json-server --watch db.json --port 3000 --host 0.0.0.0"
   },
   "dependencies": {
+    "@expo/vector-icons": "^15.1.1",
     "@react-native-community/datetimepicker": "^8.6.0",
     "expo": "~54.0.33",
     "expo-constants": "~17.0.7",

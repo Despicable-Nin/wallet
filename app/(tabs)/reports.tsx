@@ -55,7 +55,7 @@ export default function ReportsScreen() {
   return (
     <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
       <Appbar.Header style={{ backgroundColor: theme.colors.background, elevation: 0 }}>
-        <Appbar.Content title="Analysis" titleStyle={{ fontWeight: "700" }} />
+        <Appbar.Content title="Reports" titleStyle={{ fontWeight: "700" }} />
       </Appbar.Header>
 
       <ScrollView contentContainerStyle={{ padding: 16 }}>

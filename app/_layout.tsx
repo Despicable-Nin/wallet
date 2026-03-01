@@ -20,6 +20,7 @@ function MainLayout() {
         <Stack.Screen name="add-transaction" options={{ presentation: "modal" }} />
         <Stack.Screen name="edit-transaction" options={{ presentation: "modal" }} />
         <Stack.Screen name="transaction-details" options={{ title: "Details" }} />
+        <Stack.Screen name="budgets" />
         <Stack.Screen name="calendar" />
         <Stack.Screen name="agenda" />
         <Stack.Screen name="subscriptions" />
