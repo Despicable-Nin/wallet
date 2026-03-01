@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Card, Text } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Transaction } from "../types";
 import { useCurrency } from "../context/CurrencyContext";
 import { useUserProfile } from "../context/UserProfileContext";

@@ -1,6 +1,6 @@
 import { View, ScrollView, TouchableOpacity, Linking } from "react-native";
 import { Text, Card, useTheme, Appbar, IconButton } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { FinancialTip } from "../../components/FinancialTip";
 import { useAppTheme } from "../../context/ThemeContext";
 

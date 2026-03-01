@@ -3,7 +3,7 @@ import { Text, useTheme } from "react-native-paper";
 import { useRouter } from "expo-router";
 import { Transaction } from "../types";
 import { useCurrency } from "../context/CurrencyContext";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
 const PAYMENT_ICONS: Record<string, any> = {
   cash: "cash",

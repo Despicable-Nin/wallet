@@ -1,6 +1,6 @@
 import { View, ActivityIndicator, ScrollView, TouchableOpacity } from "react-native";
 import { FAB, Appbar, Text, Button, Card, IconButton } from "react-native-paper";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useRouter, useFocusEffect, Redirect } from "expo-router";
 import { useCallback } from "react";
 import { useAppTheme } from "../../context/ThemeContext";
@@ -80,9 +80,8 @@ export default function Dashboard() {
         <View style={{ flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", paddingHorizontal: 16, marginTop: 20 }}>
           {[
             { label: "Budgets", icon: "wallet-outline", path: "/budgets" },
-            { label: "Reports", icon: "chart-bar", path: "/reports" },
-            { label: "Learning", icon: "school-outline", path: "/learning" },
             { label: "Agenda", icon: "calendar-check-outline", path: "/agenda" },
+            { label: "Savings", icon: "piggy-bank-outline", path: "/savings" },
           ].map((item) => (
             <TouchableOpacity
               key={item.path}
