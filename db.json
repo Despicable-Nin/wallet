@@ -1,4 +1,9 @@
 {
+  "userProfile": {
+    "isFirstRun": false,
+    "name": "John Doe",
+    "initialBalance": 100000
+  },
   "transactions": [
     {
       "id": "1770252687356",

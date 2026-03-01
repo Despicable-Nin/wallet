@@ -1,11 +1,12 @@
 import { View, ActivityIndicator, ScrollView } from "react-native";
 import { FAB, Appbar, Text, Button, Card } from "react-native-paper";
-import { useRouter, useFocusEffect } from "expo-router";
+import { useRouter, useFocusEffect, Redirect } from "expo-router";
 import { useCallback } from "react";
 import { useTransactions } from "../hooks/useTransactions";
 import { useBudgets } from "../hooks/useBudgets";
 import { useSubscriptions } from "../hooks/useSubscriptions";
 import { useCurrency } from "../context/CurrencyContext";
+import { useUserProfile } from "../context/UserProfileContext";
 import { Subscription } from "../types";
 import { SummaryCard } from "../components/SummaryCard";
 import { ChartCard } from "../components/ChartCard";
@@ -15,6 +16,7 @@ import { BudgetCard } from "../components/BudgetCard";
 
 export default function Dashboard() {
   const router = useRouter();
+  const { profile, isLoading: profileLoading } = useUserProfile();
   const { transactions, loading: txLoading, refetch: refetchTx } = useTransactions();
   const { budgets, loading: budgetsLoading, refetch: refetchBudgets } = useBudgets();
   const { subscriptions, refetch: refetchSubs } = useSubscriptions();
@@ -30,6 +32,21 @@ export default function Dashboard() {
     }, [])
   );
 
+  // 1. While profile is loading, show spinner
+  if (profileLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <ActivityIndicator size="large" />
+      </View>
+    );
+  }
+
+  // 2. First run → Redirect component (render-time, inside navigation context)
+  if (profile?.isFirstRun) {
+    return <Redirect href="/onboarding" />;
+  }
+
+  // 3. Data still loading
   if (loading && transactions.length === 0 && budgets.length === 0) {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>

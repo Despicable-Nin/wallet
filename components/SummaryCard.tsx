@@ -3,9 +3,13 @@ import { Card, Text } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { Transaction } from "../types";
 import { useCurrency } from "../context/CurrencyContext";
+import { useUserProfile } from "../context/UserProfileContext";
 
 export function SummaryCard({ transactions }: { transactions: Transaction[] }) {
   const { formatAmount } = useCurrency();
+  const { profile } = useUserProfile();
+
+  const initialBalance = profile?.initialBalance ?? 0;
 
   const income = transactions
     .filter((t) => t.type === "income")
@@ -15,7 +19,7 @@ export function SummaryCard({ transactions }: { transactions: Transaction[] }) {
     .filter((t) => t.type === "expense")
     .reduce((sum, t) => sum + (t.amount || 0), 0);
 
-  const balance = income - expense;
+  const balance = initialBalance + income - expense;
 
   return (
     <Card style={{ margin: 16, borderRadius: 16, elevation: 4 }}>

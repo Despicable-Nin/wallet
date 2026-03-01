@@ -3,6 +3,7 @@ import { PaperProvider } from "react-native-paper";
 import { ThemeProvider, useAppTheme } from "../context/ThemeContext";
 import { CurrencyProvider } from "../context/CurrencyContext";
 import { TransactionsProvider } from "../context/TransactionsContext";
+import { UserProfileProvider } from "../context/UserProfileContext";
 
 function MainLayout() {
   const { theme } = useAppTheme();
@@ -10,6 +11,7 @@ function MainLayout() {
   return (
     <PaperProvider theme={theme}>
       <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="onboarding" options={{ title: "Welcome", animation: "fade" }} />
         <Stack.Screen name="index" options={{ title: "Dashboard" }} />
         <Stack.Screen name="add-transaction" options={{ title: "Add Transaction" }} />
         <Stack.Screen name="edit-transaction" options={{ title: "Edit Transaction" }} />
@@ -30,9 +32,11 @@ export default function RootLayout() {
   return (
     <ThemeProvider>
       <CurrencyProvider>
-        <TransactionsProvider>
-          <MainLayout />
-        </TransactionsProvider>
+        <UserProfileProvider>
+          <TransactionsProvider>
+            <MainLayout />
+          </TransactionsProvider>
+        </UserProfileProvider>
       </CurrencyProvider>
     </ThemeProvider>
   );
