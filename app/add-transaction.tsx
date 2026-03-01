@@ -1,9 +1,21 @@
 import { useState, useEffect } from "react";
-import { View, ScrollView, Image, TouchableOpacity, Platform, Alert } from "react-native";
-import { Appbar, TextInput, Button, SegmentedButtons, Text, Chip, IconButton, Portal, Modal, useTheme } from "react-native-paper";
+import { View, ScrollView, Image, Platform, Alert, TouchableOpacity } from "react-native";
+import {
+  TextInput,
+  Button,
+  Text,
+  Chip,
+  SegmentedButtons,
+  useTheme,
+  Portal,
+  Modal,
+  IconButton,
+  Appbar,
+  Card,
+} from "react-native-paper";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import { Calendar } from "react-native-calendars";
 import { useTransactions } from "../hooks/useTransactions";
 import { Category, TransactionType, PaymentMethod } from "../types";
 
@@ -128,7 +140,7 @@ export default function AddTransaction() {
       } : undefined;
 
       const finalNote = isSplit
-        ? `${note ? note + " " : ""}[Split Bill] Total: ₱${numAmount.toFixed(2)} split with ${numPeople} people.`
+        ? `${note ? note + " " : ""} [Split Bill] Total: ₱${numAmount.toFixed(2)} split with ${numPeople} people.`
         : note;
 
       await addTransaction({
@@ -355,26 +367,62 @@ export default function AddTransaction() {
           </Modal>
         </Portal>
 
-        {showCalendar && (
-          Platform.OS === 'web' ? (
-            <input
-              type="date"
-              value={date.toISOString().split('T')[0]}
-              onChange={(e) => {
-                if (e.target.value) setDate(new Date(e.target.value));
-                setShowCalendar(false);
-              }}
-              style={{ marginBottom: 16, padding: 8, fontSize: 16, width: '100%' }}
-            />
-          ) : (
-            <DateTimePicker
-              value={date}
-              mode="date"
-              display="default"
-              onChange={onDateChange}
-            />
-          )
-        )}
+        <Portal>
+          <Modal
+            visible={showCalendar}
+            onDismiss={() => setShowCalendar(false)}
+            contentContainerStyle={{
+              backgroundColor: "transparent",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Card style={{ width: "90%", borderRadius: 24, padding: 16, elevation: 10 }}>
+              <Text variant="titleMedium" style={{ marginBottom: 16, fontWeight: "700", textAlign: "center" }}>
+                Select Transaction Date
+              </Text>
+              <Calendar
+                current={date.toISOString().split('T')[0]}
+                onDayPress={(day) => {
+                  setDate(new Date(day.timestamp));
+                  setShowCalendar(false);
+                }}
+                markedDates={{
+                  [date.toISOString().split('T')[0]]: { selected: true, selectedColor: theme.colors.primary }
+                }}
+                theme={{
+                  backgroundColor: theme.colors.surface,
+                  calendarBackground: theme.colors.surface,
+                  textSectionTitleColor: theme.colors.primary,
+                  selectedDayBackgroundColor: theme.colors.primary,
+                  selectedDayTextColor: '#ffffff',
+                  todayTextColor: theme.colors.primary,
+                  dayTextColor: theme.colors.onSurface,
+                  textDisabledColor: theme.colors.surfaceVariant,
+                  dotColor: theme.colors.primary,
+                  selectedDotColor: '#ffffff',
+                  arrowColor: theme.colors.primary,
+                  disabledArrowColor: theme.colors.surfaceVariant,
+                  monthTextColor: theme.colors.onSurface,
+                  indicatorColor: theme.colors.primary,
+                  textDayFontWeight: '300',
+                  textMonthFontWeight: '700',
+                  textDayHeaderFontWeight: '300',
+                  textDayFontSize: 16,
+                  textMonthFontSize: 18,
+                  textDayHeaderFontSize: 14
+                }}
+              />
+              <Button
+                mode="text"
+                onPress={() => setShowCalendar(false)}
+                style={{ marginTop: 16 }}
+              >
+                Close
+              </Button>
+            </Card>
+          </Modal>
+        </Portal>
       </ScrollView>
     </View>
   );
