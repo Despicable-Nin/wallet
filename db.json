@@ -1,47 +1,11 @@
 {
   "userProfile": {
-    "isFirstRun": false,
-    "name": "John Doe",
-    "initialBalance": 100000
+    "isFirstRun": true,
+    "name": "",
+    "initialBalance": 0
   },
-  "transactions": [
-    {
-      "id": "1770252687356",
-      "amount": 210,
-      "date": "2026-02-05T00:51:27.356Z",
-      "note": "not working pa yata ung payment method hahah",
-      "type": "income",
-      "category": {
-        "id": 1770252687356,
-        "name": "GCash",
-        "type": "income"
-      },
-      "paymentMethod": "e_wallet",
-      "establishment": "Testing"
-    },
-    {
-      "id": "1770458605828",
-      "amount": 100,
-      "date": "2026-02-07T10:03:25.828Z",
-      "note": "wala",
-      "type": "expense",
-      "category": {
-        "id": 1770458605828,
-        "name": "rent",
-        "type": "expense"
-      },
-      "paymentMethod": "cash",
-      "establishment": "ayala alabang"
-    }
-  ],
-  "budgets": [
-    {
-      "id": "1770252623084",
-      "categoryId": 1770252623084,
-      "amount": 23432,
-      "month": "2026-02"
-    }
-  ],
+  "transactions": [],
+  "budgets": [],
   "categories": [
     {
       "id": "1",
@@ -74,15 +38,7 @@
       "type": "income"
     }
   ],
-  "agendas": [
-    {
-      "id": "1770252644077",
-      "title": "Judith",
-      "date": "2026-02-05T00:50:44.077Z",
-      "amount": 5000,
-      "completed": true
-    }
-  ],
+  "agendas": [],
   "subscriptions": [],
   "savingsGoals": []
 }
